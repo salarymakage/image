@@ -1,0 +1,27 @@
+
+# column
+
+from PIL import Image
+import pandas as pd
+
+# Open the grayscale image
+image_path = "D:/RUPP/Data Science/Year 2/PP/DSE face dataset/rom/captured_face_371.jpg"
+grayscale_image = Image.open(image_path)
+
+# Convert the image to grayscale if it's not already
+grayscale_image = grayscale_image.convert("L")
+
+# Convert the image to a numerical representation
+pixel_values = list(grayscale_image.getdata())
+
+# Create a DataFrame with a single column for pixel values
+df_pixel_values = pd.DataFrame({"Pixel Value": pixel_values})
+
+# Define the output Excel file path
+excel_file_path = "grayscale_pixel_values1.xlsx"
+
+# Save the DataFrame to Excel
+df_pixel_values.to_excel(excel_file_path, index=False)
+
+# Print a message to indicate the file is saved
+print("Pixel values of the grayscale image have been saved to", excel_file_path)
