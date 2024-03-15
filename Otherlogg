@@ -1,1 +1,52 @@
-o
+import cv2
+import matplotlib.pyplot as plt
+
+def show_and_save_color_channels(image_path, output_folder):
+    # Load the input image
+    image = cv2.imread(image_path)
+
+    # Split the image into its color channels
+    blue_channel, green_channel, red_channel = cv2.split(image)
+
+    # Create empty black images for each color channel
+    blue_image = cv2.merge([blue_channel, blue_channel, blue_channel])
+    green_image = cv2.merge([green_channel, green_channel, green_channel])
+    red_image = cv2.merge([red_channel, red_channel, red_channel])
+
+    # Display and save the color channels
+    plt.figure(figsize=(12, 6))
+    
+    # Blue Channel
+    plt.subplot(131)
+    plt.imshow(blue_image)
+    plt.title("Blue Channel")
+    plt.axis('off')
+    
+    # Green Channel
+    plt.subplot(132)
+    plt.imshow(green_image)
+    plt.title("Green Channel")
+    plt.axis('off')
+    
+    # Red Channel
+    plt.subplot(133)
+    plt.imshow(red_image)
+    plt.title("Red Channel")
+    plt.axis('off')
+    
+    # Save the color channel images
+    blue_output_path = f"{output_folder}/blue_channel.jpg"
+    green_output_path = f"{output_folder}/green_channel.jpg"
+    red_output_path = f"{output_folder}/red_channel.jpg"
+    
+    cv2.imwrite(blue_output_path, blue_image)
+    cv2.imwrite(green_output_path, green_image)
+    cv2.imwrite(red_output_path, red_image)
+    
+    plt.tight_layout()
+    plt.show()
+
+# Example usage:
+image_path = 'D:\photo_2024-03-15_19-21-27.jpg'
+output_folder = 'output_folder_path'
+show_and_save_color_channels(image_path, output_folder)
